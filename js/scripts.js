@@ -53,7 +53,8 @@ function addMoreAddresses() {
 
 
 function showContact(newContact) {
-    $("#show-contact").show();
+    $("#show-contact").hide();
+    $("#show-contact").fadeIn("slow");
     $("#show-contact h2").text(newContact.fullName());
     $(".first-name").text(newContact.firstName);
     $(".last-name").text(newContact.lastName);
@@ -94,6 +95,7 @@ $(document).ready(function() {
         $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
 
         $(".contact").last().click(function() {
+
             showContact(newContact);
         });
 
