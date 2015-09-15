@@ -27,30 +27,49 @@ function resetFields() {
     $("input.new-state").val ("");
     $("input.new-address-type").val ("");
 
-    }
+}
+
+function addMoreAddresses() {
+    $("#new-addresses").append('<div class="new-address">' +
+                                    '<div class="form-group">' +
+                                        '<label for="new-street">Street</label>' +
+                                        '<input type="text" class="form-control new-street">' +
+                                    '</div>' +
+                                    '<div class="form-group">' +
+                                        '<label for="new-city">City</label>' +
+                                        '<input type="text" class="form-control new-city">' +
+                                    '</div>' +
+                                    '<div class="form-group">' +
+                                        '<label for="new-state">State</label>' +
+                                        '<input type="text" class="form-control new-state">' +
+                                    '</div>' +
+                                    '<div class="form-group">' +
+                                        '<label for="new-address-type">Address Type</label>' +
+                                        '<input type="text" class="form-control new-address-type">' +
+                                    '</div>' +
+                                '</div>');
+
+}
+
+function showContact(newContact) {
+    $("#show-contact").show();
+    $("#show-contact h2").text(newContact.fullName());
+    $(".first-name").text(newContact.firstName);
+    $(".last-name").text(newContact.lastName);
+
+    $("ul#addresses").text("");
+
+    newContact.addresses.forEach(function(address) {
+        $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
+    });
+}
 
 
 $(document).ready(function() {
     $("#add-address").click(function() {
-        $("#new-addresses").append('<div class="new-address">' +
-                                        '<div class="form-group">' +
-                                            '<label for="new-street">Street</label>' +
-                                            '<input type="text" class="form-control new-street">' +
-                                        '</div>' +
-                                        '<div class="form-group">' +
-                                            '<label for="new-city">City</label>' +
-                                            '<input type="text" class="form-control new-city">' +
-                                        '</div>' +
-                                        '<div class="form-group">' +
-                                            '<label for="new-state">State</label>' +
-                                            '<input type="text" class="form-control new-state">' +
-                                        '</div>' +
-                                        '<div class="form-group">' +
-                                            '<label for="new-address-type">Address Type</label>' +
-                                            '<input type="text" class="form-control new-address-type">' +
-                                        '</div>' +
-                                    '</div>');
+        addMoreAddresses();
     });
+
 
     $("form#new-contact").submit(function(event) {
         event.preventDefault();
@@ -74,19 +93,10 @@ $(document).ready(function() {
         $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
 
         $(".contact").last().click(function() {
-            $("#show-contact").show();
-            $("#show-contact h2").text(newContact.fullName());
-            $(".first-name").text(newContact.firstName);
-            $(".last-name").text(newContact.lastName);
-
-            $("ul#addresses").text("");
-
-            newContact.addresses.forEach(function(address) {
-                $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
-            });
+            showContact(newContact);
         });
 
-resetFields();
+        resetFields();
 
     });
 });
