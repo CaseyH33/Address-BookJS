@@ -26,7 +26,7 @@ function resetFields() {
     $("input.new-city").val ("");
     $("input.new-state").val ("");
     $("input.new-address-type").val ("");
-
+    $("div.new-address").not(':first').remove();
 }
 
 function addMoreAddresses() {
@@ -50,6 +50,7 @@ function addMoreAddresses() {
                                 '</div>');
 
 }
+
 
 function showContact(newContact) {
     $("#show-contact").show();
