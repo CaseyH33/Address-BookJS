@@ -45,7 +45,7 @@ function addMoreAddresses() {
                                     '</div>' +
                                     '<div class="form-group">' +
                                         '<label for="new-address-type">Address Type</label>' +
-                                        '<input type="text" class="form-control new-address-type">' +
+                                        '<input type="text" class="form-control new-address-type" onkeydown="keyCode(event)">' +
                                     '</div>' +
                                 '</div>');
 
@@ -53,8 +53,7 @@ function addMoreAddresses() {
 
 
 function showContact(newContact) {
-    $("#show-contact").hide();
-    $("#show-contact").fadeIn("slow");
+    $("#show-contact").hide().fadeIn("slow");
     $("#show-contact h2").text(newContact.fullName());
     $(".first-name").text(newContact.firstName);
     $(".last-name").text(newContact.lastName);
@@ -64,6 +63,13 @@ function showContact(newContact) {
     newContact.addresses.forEach(function(address) {
         $("ul#addresses").append("<li>" + address.fullAddress() + "</li>");
     });
+}
+
+function keyCode(event) {
+    var x = event.keyCode;
+    if (x === 9) {
+        addMoreAddresses();
+    }
 }
 
 
